@@ -29,6 +29,18 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static('public'));
 
+const https = require('https');
+const fs = require('fs');
+const https_options = {
+ ca: fs.readFileSync("ca_bundle.crt"),
+ key: fs.readFileSync("private.key"),
+ cert: fs.readFileSync("certificate.crt")
+};
+https.createServer(https_options, function (req, res) {
+ res.writeHead(200);
+ res.end("Welcome to Node.js HTTPS Server");
+}).listen(8443)
+
 app.use((req, res, next) => {
   if (req.get('x-forwarded-proto') &&
      (req.get('x-forwarded-proto')).split(',')[0] !== 'https') {
@@ -49,8 +61,8 @@ app.get('/webauthn', (req, res) => {
 
 app.use('/authn', authn);
 
-// listen for req :)
-const port = 8080;
-const listener = app.listen(port, () => {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
+// // listen for req :)
+// const port = 8080;
+// const listener = app.listen(port, () => {
+//   console.log('Your app is listening on port ' + listener.address().port);
+// });
