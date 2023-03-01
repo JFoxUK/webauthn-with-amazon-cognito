@@ -18,8 +18,8 @@
   let globalRegisteredCredentialsJSON = {};
   
   let poolData = {
-    UserPoolId: 'user-pool-id', // Your user pool id here
-    ClientId: 'client-id' //Your app client id here
+    UserPoolId: 'us-west-2_Tn4c1UFKM', // Your user pool id here
+    ClientId: '332asccnkguhoka8rc6m4ja69o' //Your app client id here
     
   };
   let userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
